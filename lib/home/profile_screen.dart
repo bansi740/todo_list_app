@@ -407,7 +407,10 @@ class UserAvatar extends StatelessWidget {
         Colors.teal,
       ];
 
-      final colorIndex = firstLetter.codeUnitAt(0) % bgColors.length;
+      // Use full name for color (stable + changes when name changes)
+      final colorIndex = name.isNotEmpty
+          ? name.hashCode.abs() % bgColors.length
+          : 0;
 
       return CircleAvatar(
         radius: radius,
