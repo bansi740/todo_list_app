@@ -179,8 +179,8 @@ class _TermsScreenState extends State<TermsScreen> {
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
                                 color: isDark
-                                    ? Colors.white.withOpacity(0.04)
-                                    : Colors.black.withOpacity(0.03),
+                                    ? Colors.white.withAlpha(10)
+                                    : Colors.black.withAlpha(10),
                                 borderRadius: BorderRadius.circular(14),
                               ),
                               child: Column(
