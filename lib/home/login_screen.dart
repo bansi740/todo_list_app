@@ -184,8 +184,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: emailController,
                   label: "Email",
                   onChanged: (value) {
-                    fetchUserData(value);
                     emailControllerX.updateEmailSuggestions(value);
+
+                    if (value.contains("@") && value.contains(".")) {
+                      fetchUserData(value);
+                    }
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -220,6 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             emailController.text = email;
                             emailControllerX.clearSuggestions();
+                            fetchUserData(email); // ✅ ADD THIS LINE
                           },
                         );
                       }).toList(),
