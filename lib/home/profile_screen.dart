@@ -40,10 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: isDark ? Colors.black : Colors.white,
               alignment: Alignment.center,
               child: InteractiveViewer(
-                child: CircleAvatar(
-                  radius: 150,
-                  backgroundColor: isDark ? Colors.grey[900] : Colors.grey[200],
-                ),
+                child: const UserAvatar(radius: 150, fontSize: 80),
               ),
             ),
           ),
@@ -255,10 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     GestureDetector(
                       onLongPress: () => _showImagePreview(context),
-                      child: CircleAvatar(
-                        radius: 45,
-                        backgroundColor:isDark ? Colors.grey.shade800.withAlpha(150) : Colors.grey.shade300,
-                      ),
+                      child: const UserAvatar(radius: 45, fontSize: 28),
                     ),
 
                     const SizedBox(height: 14),
@@ -390,3 +384,43 @@ Widget _buildInfoRow(
   );
 }
 
+class UserAvatar extends StatelessWidget {
+  final double radius;
+  final double fontSize;
+
+  const UserAvatar({super.key, this.radius = 40, this.fontSize = 24});
+
+  @override
+  Widget build(BuildContext context) {
+    final UserController userController = Get.find();
+
+    return Obx(() {
+      final name = userController.name.value.trim();
+      final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : "U";
+
+      final bgColors = [
+        Colors.red,
+        Colors.blue,
+        Colors.green,
+        Colors.orange,
+        Colors.purple,
+        Colors.teal,
+      ];
+
+      final colorIndex = firstLetter.codeUnitAt(0) % bgColors.length;
+
+      return CircleAvatar(
+        radius: radius,
+        backgroundColor: bgColors[colorIndex],
+        child: Text(
+          firstLetter,
+          style: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      );
+    });
+  }
+}
