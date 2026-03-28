@@ -10,7 +10,6 @@ import 'package:todo_list_app/utils/assets.dart';
 
 import '../utils/common_widgets.dart';
 import 'controller/email_controller.dart';
-import 'controller/password_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,7 +21,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final PasswordController passwordControllerX = Get.put(PasswordController());
   final EmailController emailControllerX = Get.put(EmailController());
 
   String? userName;
@@ -223,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             emailController.text = email;
                             emailControllerX.clearSuggestions();
-                            fetchUserData(email); // ✅ ADD THIS LINE
+                            fetchUserData(email); //  ADD THIS LINE
                           },
                         );
                       }).toList(),
@@ -238,9 +236,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: passwordController,
                   label: "Password",
                   isPassword: true,
-                  onChanged: (value) {
-                    passwordControllerX.checkPassword(value);
-                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter password";
@@ -252,90 +247,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
 
-                const SizedBox(height: 10),
-
-                Obx(() {
-                  if (passwordControllerX.strength.value == 0) {
-                    return const SizedBox();
-                  }
-
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade900
-                          : Colors.grey.shade100,
-                      border: Border.all(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TweenAnimationBuilder<double>(
-                          tween: Tween<double>(
-                            begin: 0,
-                            end: passwordControllerX.strength.value,
-                          ),
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          builder: (context, value, child) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: LinearProgressIndicator(
-                                value: value,
-                                minHeight: 8,
-                                backgroundColor: Colors.grey.shade300,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  passwordControllerX.strengthColor.value,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Password Strength",
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey.shade600,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: Text(
-                                passwordControllerX.strengthText.value,
-                                key: ValueKey(
-                                  passwordControllerX.strengthText.value,
-                                ),
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color:
-                                      passwordControllerX.strengthColor.value,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                }),
 
                 const SizedBox(height: 35),
 
