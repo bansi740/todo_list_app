@@ -60,6 +60,30 @@ class _LoginScreenState extends State<LoginScreen> {
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
+      if (email.isEmpty && password.isEmpty) {
+        Get.snackbar("Error", "Please enter email and password");
+        return;
+      }
+
+      if (email.isEmpty) {
+        Get.snackbar("Error", "Please enter email");
+        return;
+      }
+
+      if (!email.contains("@") || !email.contains(".")) {
+        Get.snackbar("Error", "Enter a valid email");
+        return;
+      }
+
+      if (password.isEmpty) {
+        Get.snackbar("Error", "Please enter password");
+        return;
+      }
+      if (password.length < 6) {
+        Get.snackbar("Error", "Password must be at least 6 characters");
+        return;
+      }
+
       QuerySnapshot userQuery = await FirebaseFirestore.instance
           .collection("users")
           .where("email", isEqualTo: email)
@@ -188,15 +212,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       fetchUserData(value);
                     }
                   },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter email";
-                    }
-                    if (!value.contains("@")) {
-                      return "Enter a valid email";
-                    }
-                    return null;
-                  },
                 ),
                 // Email Suggestions UI
                 const SizedBox(height: 8),
@@ -236,17 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: passwordController,
                   label: "Password",
                   isPassword: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter password";
-                    }
-                    if (value.length < 6) {
-                      return "Password must be at least 6 characters";
-                    }
-                    return null;
-                  },
                 ),
-
 
                 const SizedBox(height: 35),
 
