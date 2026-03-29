@@ -153,78 +153,83 @@ class _TodoListScreenState extends State<TodoListScreen> {
                           Row(
                             children: [
                               Obx(
-                                () => Expanded(
-                                  child: Container(
-                                    height: 42,
-                                    decoration: BoxDecoration(
-                                      color: isDark
-                                          ? Colors.grey.shade900.withAlpha(100)
-                                          : Colors.grey.shade100.withAlpha(70),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: isDark
-                                            ? Colors.grey.shade800
-                                            : Colors.grey.shade300,
-                                      ),
-                                    ),
-                                    child: TextField(
-                                      controller: _searchController,
-                                      focusNode: _searchFocusNode,
-                                      onChanged: controller.updateSearch,
-                                      cursorColor: isDark
-                                          ? Colors.grey.shade300.withAlpha(170)
-                                          : Colors.grey,
-                                      style: TextStyle(
-                                        color: isDark
-                                            ? Colors.white
-                                            : Colors.black87,
-                                        fontSize: 14, // slightly smaller
-                                      ),
-                                      decoration: InputDecoration(
-                                        hintText: AppString.searchTask,
-                                        hintStyle: TextStyle(
+                                    () =>
+                                    Expanded(
+                                      child: Container(
+                                        height: 42,
+                                        decoration: BoxDecoration(
                                           color: isDark
-                                              ? Colors.grey.shade500
-                                              : Colors.grey.shade600,
-                                          fontSize: 13,
+                                              ? Colors.grey.shade900.withAlpha(
+                                              100)
+                                              : Colors.grey.shade100.withAlpha(
+                                              70),
+                                          borderRadius: BorderRadius.circular(
+                                              12),
+                                          border: Border.all(
+                                            color: isDark
+                                                ? Colors.grey.shade800
+                                                : Colors.grey.shade300,
+                                          ),
                                         ),
-                                        prefixIcon: Icon(
-                                          Icons.search_rounded,
-                                          size: 20,
-                                          color: isDark
-                                              ? Colors.grey
-                                              : Colors.black54,
-                                        ),
-                                        suffixIcon:
+                                        child: TextField(
+                                          controller: _searchController,
+                                          focusNode: _searchFocusNode,
+                                          onChanged: controller.updateSearch,
+                                          cursorColor: isDark
+                                              ? Colors.grey.shade300.withAlpha(
+                                              170)
+                                              : Colors.grey,
+                                          style: TextStyle(
+                                            color: isDark
+                                                ? Colors.white
+                                                : Colors.black87,
+                                            fontSize: 14, // slightly smaller
+                                          ),
+                                          decoration: InputDecoration(
+                                            hintText: AppString.searchTask,
+                                            hintStyle: TextStyle(
+                                              color: isDark
+                                                  ? Colors.grey.shade500
+                                                  : Colors.grey.shade600,
+                                              fontSize: 13,
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.search_rounded,
+                                              size: 20,
+                                              color: isDark
+                                                  ? Colors.grey
+                                                  : Colors.black54,
+                                            ),
+                                            suffixIcon:
                                             controller
                                                 .searchQuery
                                                 .value
                                                 .isNotEmpty
-                                            ? IconButton(
-                                                icon: Icon(
-                                                  Icons.close_rounded,
-                                                  size: 18,
-                                                  color: isDark
-                                                      ? Colors.grey
-                                                      : Colors.black54,
-                                                ),
-                                                onPressed: () {
-                                                  _searchController.clear();
-                                                  controller.updateSearch('');
-                                                },
-                                              )
-                                            : null,
-                                        border: InputBorder.none,
-                                        isDense: true,
-                                        contentPadding:
+                                                ? IconButton(
+                                              icon: Icon(
+                                                Icons.close_rounded,
+                                                size: 18,
+                                                color: isDark
+                                                    ? Colors.grey
+                                                    : Colors.black54,
+                                              ),
+                                              onPressed: () {
+                                                _searchController.clear();
+                                                controller.updateSearch('');
+                                              },
+                                            )
+                                                : null,
+                                            border: InputBorder.none,
+                                            isDense: true,
+                                            contentPadding:
                                             const EdgeInsets.symmetric(
                                               vertical: 11,
                                               horizontal: 0,
                                             ),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
                               ),
                               // SORT
                               Align(
@@ -236,68 +241,71 @@ class _TodoListScreenState extends State<TodoListScreen> {
                           const SizedBox(height: 5),
                           // FILTER CHIPS
                           Obx(
-                            () => SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              physics: const BouncingScrollPhysics(),
-                              child: Row(
-                                children: List.generate(filterLabels.length, (
-                                  index,
-                                ) {
-                                  final isSelected =
-                                      selectedFilter.value == index;
+                                () =>
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: const BouncingScrollPhysics(),
+                                  child: Row(
+                                    children: List.generate(
+                                        filterLabels.length, (index,) {
+                                      final isSelected =
+                                          selectedFilter.value == index;
 
-                                  return GestureDetector(
-                                    onTap: () => selectedFilter.value = index,
-                                    child: AnimatedContainer(
-                                      duration: const Duration(
-                                        milliseconds: 200,
-                                      ),
-                                      curve: Curves.easeOut,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 14,
-                                        vertical: 8,
-                                      ),
+                                      return GestureDetector(
+                                        onTap: () =>
+                                        selectedFilter.value = index,
+                                        child: AnimatedContainer(
+                                          duration: const Duration(
+                                            milliseconds: 200,
+                                          ),
+                                          curve: Curves.easeOut,
+                                          margin: const EdgeInsets.only(
+                                              right: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 14,
+                                            vertical: 8,
+                                          ),
 
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                                12),
 
-                                        //  CLEAN BACKGROUND
-                                        color: isSelected
-                                            ? (isDark
-                                                  ? Colors.grey.shade800
-                                                  : Colors.black)
-                                            : Colors.transparent,
+                                            //  CLEAN BACKGROUND
+                                            color: isSelected
+                                                ? (isDark
+                                                ? Colors.grey.shade800
+                                                : Colors.black)
+                                                : Colors.transparent,
 
-                                        //  SUBTLE BORDER
-                                        border: Border.all(
-                                          color: isSelected
-                                              ? Colors.transparent
-                                              : (isDark
-                                                    ? Colors.grey.shade700
-                                                    : Colors.grey.shade300),
+                                            //  SUBTLE BORDER
+                                            border: Border.all(
+                                              color: isSelected
+                                                  ? Colors.transparent
+                                                  : (isDark
+                                                  ? Colors.grey.shade700
+                                                  : Colors.grey.shade300),
+                                            ),
+                                          ),
+
+                                          child: Text(
+                                            filterLabels[index],
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+
+                                              //  CLEAN TEXT COLORS
+                                              color: isSelected
+                                                  ? Colors.white
+                                                  : (isDark
+                                                  ? Colors.grey.shade400
+                                                  : Colors.black87),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-
-                                      child: Text(
-                                        filterLabels[index],
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-
-                                          //  CLEAN TEXT COLORS
-                                          color: isSelected
-                                              ? Colors.white
-                                              : (isDark
-                                                    ? Colors.grey.shade400
-                                                    : Colors.black87),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }),
-                              ),
-                            ),
+                                      );
+                                    }),
+                                  ),
+                                ),
                           ),
                         ],
                       ),
@@ -324,7 +332,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                           controller: _scrollController,
                           padding: const EdgeInsets.all(16),
                           separatorBuilder: (context, index) =>
-                              const SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           itemCount: todos.length,
                           itemBuilder: (context, index) {
                             final todo = todos[index];
@@ -425,7 +433,7 @@ void _showAnimatedAddTaskDialog(BuildContext context) {
     barrierColor: Colors.black38,
     transitionDuration: const Duration(milliseconds: 400),
     pageBuilder: (context, animation, secondaryAnimation) =>
-        const SizedBox.shrink(),
+    const SizedBox.shrink(),
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       final curvedValue = Curves.easeOutBack.transform(animation.value);
       final scale = TweenSequence<double>([
