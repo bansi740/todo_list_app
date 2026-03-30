@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:todo_list_app/home/terms_screen.dart';
 import 'package:todo_list_app/home/todo_list_screen.dart';
 
-import '../utils/assets.dart';
 import '../utils/common_widgets.dart';
 import 'controller/email_controller.dart';
 import 'controller/password_controller.dart';
@@ -78,20 +77,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset(
-                      AssetsPath.registerIcon,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
-                      width: 65,
-                      height: 65,
-                    ),
                     const SizedBox(height: 10),
                     Text(
                       "Create Account",
                       style: TextStyle(
                         fontSize: 28,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                         color: Theme.of(context).brightness == Brightness.dark
                             ? Colors.white
                             : Colors.black,
