@@ -177,7 +177,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       label: "Password",
                       isPassword: true,
                       onChanged: (value) {
-                    passwordControllerX.checkPassword(value);
+                        passwordControllerX.checkPassword(value);
                       },
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -210,7 +210,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ? Colors.grey.shade900
                               : Colors.grey.shade100,
                           border: Border.all(
-                            color: Theme.of(context).brightness == Brightness.dark
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
                                 ? Colors.grey.shade800
                                 : Colors.grey.shade300,
                           ),
@@ -263,8 +264,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     style: TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                      passwordControllerX.strengthColor.value,
+                                      color: passwordControllerX
+                                          .strengthColor
+                                          .value,
                                     ),
                                   ),
                                 ),
@@ -317,6 +319,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account? ",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey
+                                : Colors.black54,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Get.back(); // back to login screen
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            minimumSize: const Size(0, 0),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
