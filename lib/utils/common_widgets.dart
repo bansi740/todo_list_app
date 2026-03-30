@@ -703,3 +703,54 @@ class TodoItemAnimation extends StatelessWidget {
   }
 }
 
+// avatar in login and profile
+class CommonAvatar extends StatelessWidget {
+  final String? userName;
+  final double radius;
+  final double fontSize;
+  final Widget? fallback;
+
+  const CommonAvatar({
+    super.key,
+    required this.userName,
+    this.radius = 40,
+    this.fontSize = 24,
+    this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final name = userName?.trim() ?? "";
+    final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : "U";
+
+    final bgColors = [
+      Colors.red,
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.teal,
+    ];
+
+    final colorIndex = name.isNotEmpty
+        ? name.hashCode.abs() % bgColors.length
+        : 0;
+
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: name.isNotEmpty
+          ? bgColors[colorIndex]
+          : Colors.transparent,
+      child: name.isNotEmpty
+          ? Text(
+        firstLetter,
+        style: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      )
+          : fallback,
+    );
+  }
+}

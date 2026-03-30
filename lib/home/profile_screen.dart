@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'controller/theme_controller.dart';
+import '../utils/common_widgets.dart';
 import 'controller/user_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -15,51 +15,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final UserController userController = Get.put(UserController());
-
-  void _showImagePreview(BuildContext context) {
-    final isDark = Get.find<ThemeController>().isDarkMode;
-
-    showGeneralDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierLabel: "Image Preview",
-      barrierColor: Colors.black54,
-      transitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return AnnotatedRegion<SystemUiOverlayStyle>(
-          value: isDark
-              ? SystemUiOverlayStyle.light.copyWith(
-                  statusBarColor: Colors.black,
-                )
-              : SystemUiOverlayStyle.dark.copyWith(
-                  statusBarColor: Colors.white,
-                ),
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              color: isDark ? Colors.black : Colors.white,
-              alignment: Alignment.center,
-              child: InteractiveViewer(
-                child: const UserAvatar(radius: 150, fontSize: 80),
-              ),
-            ),
-          ),
-        );
-      },
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: ScaleTransition(
-            scale: CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeOutBack,
-            ),
-            child: child,
-          ),
-        );
-      },
-    );
-  }
 
   void _showEditDialog(bool isDark) {
     final TextEditingController nameController = TextEditingController(
@@ -250,9 +205,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    GestureDetector(
-                      onLongPress: () => _showImagePreview(context),
-                      child: const UserAvatar(radius: 45, fontSize: 28),
+                    CommonAvatar(
+                      userName: userController.name.value,
+                      radius: 45,
+                      fontSize: 28,
                     ),
 
                     const SizedBox(height: 14),
@@ -382,48 +338,4 @@ Widget _buildInfoRow(
       ],
     ),
   );
-}
-
-class UserAvatar extends StatelessWidget {
-  final double radius;
-  final double fontSize;
-
-  const UserAvatar({super.key, this.radius = 40, this.fontSize = 24});
-
-  @override
-  Widget build(BuildContext context) {
-    final UserController userController = Get.find();
-
-    return Obx(() {
-      final name = userController.name.value.trim();
-      final firstLetter = name.isNotEmpty ? name[0].toUpperCase() : "U";
-
-      final bgColors = [
-        Colors.red,
-        Colors.blue,
-        Colors.green,
-        Colors.orange,
-        Colors.purple,
-        Colors.teal,
-      ];
-
-      // Use full name for color (stable + changes when name changes)
-      final colorIndex = name.isNotEmpty
-          ? name.hashCode.abs() % bgColors.length
-          : 0;
-
-      return CircleAvatar(
-        radius: radius,
-        backgroundColor: bgColors[colorIndex],
-        child: Text(
-          firstLetter,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      );
-    });
-  }
 }

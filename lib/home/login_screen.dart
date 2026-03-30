@@ -144,47 +144,52 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  AssetsPath.loginIcon,
+                isLoadingUser
+                    ? SpinKitSpinningLines(
                   color: Theme.of(context).brightness == Brightness.dark
                       ? Colors.white
                       : Colors.black,
-                  width: 55,
-                  height: 55,
-                ),
-                const SizedBox(height: 10),
+                  size: 35.0,
+                )
+                    : Column(
+                  children: [
+                    // show avatar only when user found
+                    if (userName != null) ...[
+                      CommonAvatar(
+                        userName: userName,
+                        radius: 35,
+                        fontSize: 22,
+                        fallback: Image.asset(
+                          AssetsPath.loginIcon,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
+                          width: 35,
+                          height: 35,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
 
-                isLoadingUser
-                    ? SpinKitSpinningLines(
+                      _TypingText(
+                        text: userName!,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
                         color: Theme.of(context).brightness == Brightness.dark
                             ? Colors.white
                             : Colors.black,
-                        size: 35.0,
-                      )
-                    : Column(
-                        children: [
-                          _TypingText(
-                            text: "Welcome Back",
-                            fontSize: userName != null ? 18 : 28,
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                          const SizedBox(height: 4),
-                          if (userName != null)
-                            _TypingText(
-                              text: userName!,
-                              fontSize: 28,
-                              fontWeight: FontWeight.w700,
-                              color:
-                                  Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                        ],
                       ),
+                      const SizedBox(height: 6),
+                    ],
+
+                    _TypingText(
+                      text: "Welcome Back",
+                      fontSize: userName != null ? 18 : 30,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                  ],
+                ),
 
                 const SizedBox(height: 6),
 
