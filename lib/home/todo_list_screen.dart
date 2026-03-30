@@ -4,7 +4,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:todo_list_app/home/controller/home_controller.dart';
-import 'package:todo_list_app/home/profile_screen.dart';
 import 'package:todo_list_app/home/settings_screen.dart';
 import 'package:todo_list_app/home/todo_list_database/todo_firestore_service.dart';
 import 'package:todo_list_app/home/todo_list_database/todo_list_model.dart';
@@ -109,17 +108,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
             ),
             actionsPadding: const EdgeInsets.only(right: 15),
             actions: [
-              GestureDetector(
-                onDoubleTap: () {
-                  Get.to(() => ProfileScreen());
+              IconButton(
+                icon: Icon(Icons.settings, color: textColor),
+                onPressed: () {
+                  // Navigate directly to SettingsScreen
+                  Get.to(() => const SettingsScreen());
                 },
-                child: IconButton(
-                  icon: Icon(Icons.settings, color: textColor),
-                  onPressed: () {
-                    // Navigate directly to SettingsScreen
-                    Get.to(() => const SettingsScreen());
-                  },
-                ),
               ),
             ],
           ),
