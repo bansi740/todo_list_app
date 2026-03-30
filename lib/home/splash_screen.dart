@@ -20,20 +20,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(initApp);
+    initApp();
   }
-  void initApp() async {
-    await Future.wait([
-      themeController.loadTheme(),
-      Future.delayed(const Duration(milliseconds: 300)),
-    ]);
 
-    final user = FirebaseAuth.instance.currentUser;
+  void initApp() async {
+    // load theme
+    await themeController.loadTheme();
+
+    // Small splash delay
+    await Future.delayed(const Duration(milliseconds: 800));
+
+    User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      Get.offAll(() => const TodoListScreen());
+      Get.off(() => const TodoListScreen());
     } else {
-      Get.offAll(() => const LoginScreen());
+      Get.off(() => const LoginScreen());
     }
   }
 
