@@ -30,7 +30,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final StatsController statsController = Get.put(StatsController());
   final ThemeController themeController = Get.find();
 
-
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -38,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
       final backgroundColor = isDark ? black : Colors.grey[100];
       final cardColor = isDark
-          ? Colors.grey.shade900.withAlpha(100) // semi-transparent dark
+          ? Colors.grey.shade900.withAlpha(95) // semi-transparent dark
           : Colors.white.withAlpha(250);
       final textColor = isDark ? Colors.white : Colors.black87;
 
@@ -109,7 +108,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             _buildRecentlyDeleted(context, textColor, isDark),
                             const CommonDivider(startIndent: 20),
                             _buildHelpFeedback(context, textColor, isDark),
-
                           ],
                         ),
                       ),
@@ -215,19 +213,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Container(
       margin: const EdgeInsets.only(top: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(26),
+        border: Border.all(
+          color: isDark ? Colors.grey.shade900 : Colors.grey.shade300,
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? Colors.black.withAlpha(10)
-                : Colors.black.withAlpha(10),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
+                ? Colors.black.withAlpha(80)
+                : Colors.grey.withAlpha(60),
+            blurRadius: 22,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
+
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(26),
         child: Material(color: cardColor, child: child),
       ),
     );
@@ -681,8 +684,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         "PIN & Biometric settings",
         style: TextStyle(color: Colors.grey.shade500),
       ),
-      onTap: () {
-      },
+      onTap: () {},
     );
   }
 
