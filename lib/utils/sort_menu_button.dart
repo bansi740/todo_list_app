@@ -82,8 +82,8 @@ class SortMenuButton extends StatelessWidget {
               children: [
                 Image.asset(
                   isDark ? AssetsPath.titleDarkIcon : AssetsPath.titleIcon,
-                  height: 24,
-                  width: 24,
+                  height: 20,
+                  width: 20,
                 ),
                 const SizedBox(width: 12),
                 const Expanded(child: Text("Title")),
@@ -98,8 +98,8 @@ class SortMenuButton extends StatelessWidget {
               children: [
                 Image.asset(
                   isDark ? AssetsPath.dateDarkIcon : AssetsPath.dateIcon,
-                  height: 24,
-                  width: 24,
+                  height: 20,
+                  width: 20,
                 ),
                 const SizedBox(width: 12),
                 const Expanded(child: Text("Date")),
@@ -111,7 +111,7 @@ class SortMenuButton extends StatelessWidget {
           const PopupMenuDivider(),
           PopupMenuItem(
             enabled: false,
-            height: 24,
+            height: 20,
             child: Text(
               "ORDER",
               style: TextStyle(
