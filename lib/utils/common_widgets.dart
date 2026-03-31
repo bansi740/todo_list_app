@@ -22,15 +22,14 @@ class TodoTextField extends StatefulWidget {
   final bool isPassword;
   final FocusNode? focusNode;
 
-
-
   const TodoTextField({
     super.key,
     required this.controller,
     required this.label,
     this.validator,
     this.onChanged,
-    this.isPassword = false, this.focusNode,
+    this.isPassword = false,
+    this.focusNode,
   });
 
   @override
@@ -348,14 +347,23 @@ class _TodoItemState extends State<TodoItem> with TickerProviderStateMixin {
                                       builder: (context) {
                                         return Dialog(
                                           backgroundColor: Colors.transparent,
-                                          insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+                                          insetPadding:
+                                              const EdgeInsets.symmetric(
+                                                horizontal: 24,
+                                              ),
                                           child: TweenAnimationBuilder<double>(
-                                            duration: const Duration(milliseconds: 300),
+                                            duration: const Duration(
+                                              milliseconds: 300,
+                                            ),
                                             curve: Curves.easeOut,
-                                            tween: Tween(begin: 0.85, end: 1.05),
+                                            tween: Tween(
+                                              begin: 0.85,
+                                              end: 1.05,
+                                            ),
                                             builder: (context, scale, child) {
                                               return Opacity(
-                                                opacity: scale.clamp(0, 1), // fade effect
+                                                opacity: scale.clamp(0, 1),
+                                                // fade effect
                                                 child: Transform.scale(
                                                   scale: scale,
                                                   child: child,
@@ -365,27 +373,42 @@ class _TodoItemState extends State<TodoItem> with TickerProviderStateMixin {
                                             child: Container(
                                               width: 190,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(24),
+                                                borderRadius:
+                                                    BorderRadius.circular(24),
                                                 color: isDark
-                                                    ? const Color(0xff1E1E1E).withAlpha(220)
-                                                    : Colors.white.withAlpha(235),
+                                                    ? const Color(
+                                                        0xff1E1E1E,
+                                                      ).withAlpha(220)
+                                                    : Colors.white.withAlpha(
+                                                        235,
+                                                      ),
                                                 border: Border.all(
                                                   color: isDark
-                                                      ? Colors.white.withAlpha(20)
-                                                      : Colors.black.withAlpha(10),
+                                                      ? Colors.white.withAlpha(
+                                                          20,
+                                                        )
+                                                      : Colors.black.withAlpha(
+                                                          10,
+                                                        ),
                                                 ),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Colors.black.withAlpha(40),
+                                                    color: Colors.black
+                                                        .withAlpha(40),
                                                     blurRadius: 20,
                                                     offset: const Offset(0, 10),
                                                   ),
                                                 ],
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 22,
+                                                      vertical: 24,
+                                                    ),
                                                 child: Column(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
                                                     // Icon
                                                     Container(
@@ -393,15 +416,23 @@ class _TodoItemState extends State<TodoItem> with TickerProviderStateMixin {
                                                       width: 72,
                                                       decoration: BoxDecoration(
                                                         shape: BoxShape.circle,
-                                                        gradient: LinearGradient(
-                                                          colors: [
-                                                            Colors.red.withAlpha(120),
-                                                            Colors.red.withAlpha(40),
-                                                          ],
-                                                        ),
+                                                        gradient:
+                                                            LinearGradient(
+                                                              colors: [
+                                                                Colors.red
+                                                                    .withAlpha(
+                                                                      120,
+                                                                    ),
+                                                                Colors.red
+                                                                    .withAlpha(
+                                                                      40,
+                                                                    ),
+                                                              ],
+                                                            ),
                                                       ),
                                                       child: const Icon(
-                                                        Icons.delete_outline_rounded,
+                                                        Icons
+                                                            .delete_outline_rounded,
                                                         color: Colors.red,
                                                         size: 34,
                                                       ),
@@ -413,9 +444,12 @@ class _TodoItemState extends State<TodoItem> with TickerProviderStateMixin {
                                                       "Delete Task",
                                                       style: TextStyle(
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.w700,
+                                                        fontWeight:
+                                                            FontWeight.w700,
                                                         letterSpacing: 0.3,
-                                                        color: isDark ? Colors.white : Colors.black,
+                                                        color: isDark
+                                                            ? Colors.white
+                                                            : Colors.black,
                                                       ),
                                                     ),
 
@@ -423,13 +457,20 @@ class _TodoItemState extends State<TodoItem> with TickerProviderStateMixin {
 
                                                     Text(
                                                       "Are you sure you want to delete this task?\nThis action cannot be undone.",
-                                                      textAlign: TextAlign.center,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       style: TextStyle(
                                                         fontSize: 14.5,
                                                         height: 1.5,
                                                         color: isDark
-                                                            ? Colors.white.withAlpha(180)
-                                                            : Colors.black.withAlpha(180),
+                                                            ? Colors.white
+                                                                  .withAlpha(
+                                                                    180,
+                                                                  )
+                                                            : Colors.black
+                                                                  .withAlpha(
+                                                                    180,
+                                                                  ),
                                                       ),
                                                     ),
 
@@ -439,48 +480,97 @@ class _TodoItemState extends State<TodoItem> with TickerProviderStateMixin {
                                                       children: [
                                                         Expanded(
                                                           child: OutlinedButton(
-                                                            onPressed: () => Navigator.pop(context, false),
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                  context,
+                                                                  false,
+                                                                ),
                                                             style: OutlinedButton.styleFrom(
-                                                              padding: const EdgeInsets.symmetric(vertical: 14),
+                                                              padding:
+                                                                  const EdgeInsets.symmetric(
+                                                                    vertical:
+                                                                        14,
+                                                                  ),
                                                               side: BorderSide(
                                                                 color: isDark
-                                                                    ? Colors.white.withAlpha(30)
-                                                                    : Colors.black.withAlpha(20),
+                                                                    ? Colors
+                                                                          .white
+                                                                          .withAlpha(
+                                                                            30,
+                                                                          )
+                                                                    : Colors
+                                                                          .black
+                                                                          .withAlpha(
+                                                                            20,
+                                                                          ),
                                                               ),
                                                               shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(14),
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      14,
+                                                                    ),
                                                               ),
                                                             ),
                                                             child: Text(
                                                               AppString.cancel,
                                                               style: TextStyle(
-                                                                fontWeight: FontWeight.w500,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
                                                                 color: isDark
-                                                                    ? Colors.white.withAlpha(200)
-                                                                    : Colors.black.withAlpha(200),
+                                                                    ? Colors
+                                                                          .white
+                                                                          .withAlpha(
+                                                                            200,
+                                                                          )
+                                                                    : Colors
+                                                                          .black
+                                                                          .withAlpha(
+                                                                            200,
+                                                                          ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
 
-                                                        const SizedBox(width: 12),
+                                                        const SizedBox(
+                                                          width: 12,
+                                                        ),
 
                                                         Expanded(
                                                           child: ElevatedButton(
-                                                            onPressed: () => Navigator.pop(context, true),
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                  context,
+                                                                  true,
+                                                                ),
                                                             style: ElevatedButton.styleFrom(
-                                                              backgroundColor: Colors.red.withAlpha(220),
-                                                              padding: const EdgeInsets.symmetric(vertical: 14),
+                                                              backgroundColor:
+                                                                  Colors.red
+                                                                      .withAlpha(
+                                                                        220,
+                                                                      ),
+                                                              padding:
+                                                                  const EdgeInsets.symmetric(
+                                                                    vertical:
+                                                                        14,
+                                                                  ),
                                                               elevation: 0,
                                                               shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(14),
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                      14,
+                                                                    ),
                                                               ),
                                                             ),
                                                             child: const Text(
                                                               AppString.delete,
                                                               style: TextStyle(
-                                                                fontWeight: FontWeight.w600,
-                                                                color: Colors.white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .white,
                                                               ),
                                                             ),
                                                           ),
@@ -543,14 +633,9 @@ class TodoStatusPill extends StatelessWidget {
       curve: Curves.easeOut,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: isDark
-            ? baseColor.withAlpha(30)
-            : baseColor.withAlpha(30),
+        color: isDark ? baseColor.withAlpha(30) : baseColor.withAlpha(30),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: baseColor.withAlpha(70),
-          width: 0.8,
-        ),
+        border: Border.all(color: baseColor.withAlpha(70), width: 0.8),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -639,7 +724,8 @@ class _SmoothExpansionTileState extends State<SmoothExpansionTile> {
                   child: Transform.rotate(
                     angle: value * 3.1416, // smooth 180° rotation
                     child: Icon(
-                      Icons.keyboard_arrow_down_rounded,size: 24,
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 24,
                       color: Color.lerp(
                         widget.textColor,
                         widget.isDark ? Colors.white60 : Colors.blue,
@@ -743,13 +829,13 @@ class CommonAvatar extends StatelessWidget {
           : Colors.transparent,
       child: name.isNotEmpty
           ? Text(
-        firstLetter,
-        style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      )
+              firstLetter,
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            )
           : fallback,
     );
   }
